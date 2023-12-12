@@ -1,0 +1,56 @@
+{% extends 'catalog/base.html' %} <!-- наследуемся от базового шаблона -->
+
+{% block content %}
+    <!-- форма обратной связи -->
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+{#            <div class="container">#}
+{#                <!-- Contact form here-->#}
+{#                <!-- 1 строка -->#}
+                <div class="row mt-5">
+                    <!-- 1 колонка -->
+                    <div class="col-md-4">
+                        <div class="card bg-info">
+                            <div class="card-body text-white border-radius">
+                                <h3 class="card-title">Контактная информация</h3>
+                                <div class="row">
+                                    <div class="col-6">Москва</div>
+                                    <div class="col-6">+7 777 77 77</div>
+                                    <div class="col-6">Санкт-Петербург</div>
+                                    <div class="col-6">+8 888 88 88</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 2 колонка -->
+                    <div class="col-4">
+                        <div class="card bg-gray">
+                            <div class="card-body text-white border-radius">
+                                <h3 class="card-title">Напишите нам</h3>
+                                <form>
+                                    <!-- форма начало-->
+                                    <div class="mb-3">
+                                        <div class="col">
+                                            <input name="name" type="text" class="form-control" placeholder="Name" aria-label="Имя">
+                                        </div>
+                                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                                        <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Text area</label>
+                                        <textarea name="message" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Сообщение"></textarea>
+                                        <br>
+                                        <button type="submit" class="btn btn-info form-control">Отправить</button>
+                                    </div>
+                                    <!-- форма конец-->
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{#            </div>#}
+        </form>
+    </div>
+{% endblock %}

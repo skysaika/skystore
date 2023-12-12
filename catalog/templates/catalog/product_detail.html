@@ -1,0 +1,78 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% load filters %}
+
+{% block content %}
+    <!--пагинация категорий начало-->
+    {% if is_paginated %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'catalog:category_list' %}">Категории</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'catalog:product_list' %}">Все товары</a>
+                </li>
+            </ul>
+        </nav>
+    {% endif %}
+    <!-- пагинация категорий конец -->
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="card box-shadow h-100">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            Продукт: {{ object.name }}
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                                <td>Название</td>
+                                <td>{{ object.name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Описание</td>
+                                <td>{{ object.description }}</td>
+                            </tr>
+                            <tr>
+                                <td>Цена</td>
+                                <td>{{ object.price }}</td>
+                            </tr>
+                            <tr>
+                                <td>Статус</td>
+                                <td style="{% if object.available %} color: green; {% else %} color: red; {% endif %}">
+                                    {% if object.available %}
+                                        в наличии
+                                    {% else %}
+                                        нет в наличии
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card box-shadow h-100 d-flex flex-column">
+                    <div class="card-header">
+                        <h4 class="card-title text-center">
+                            Изображение
+                        </h4>
+                    </div>
+                    <div class="card-body d-flex align-items-center">
+                        {% if object.image %}
+                            <img src="{{ object.image|mediapath }}" class="img-fluid" alt="изображение"/>
+                        {% else %}
+                            <img src="/media/no_image.png" class="img-fluid" alt="no_image"/>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

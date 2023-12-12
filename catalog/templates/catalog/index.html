@@ -1,0 +1,29 @@
+{% extends 'catalog/base.html' %} <!-- наследуемся от catalog/base.html -->
+{#{% load my_tags %}#}
+{% load static %}
+
+
+{% block content %}
+    <!--пагинация категорий начало-->
+    {% if is_paginated %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'catalog:category_list' %}">Категории</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'catalog:product_list' %}">Все товары</a>
+                </li>
+            </ul>
+        </nav>
+    {% endif %}
+    <!-- пагинация категорий конец -->
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    {% for object in object_list %} <!-- цикл перебирает все объекты -->
+        <!-- внутри цикла или итерации по категориям -->
+        {% include 'catalog/includes/inc_product_card.html' %}
+    {% endfor %}
+    </div>
+
+{% endblock %}

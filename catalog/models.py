@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.urls import reverse
 from slugify import slugify
 
@@ -15,14 +12,14 @@ class Category(models.Model):
     description = models.TextField(verbose_name='описание', **NULLABLE)
     slug = models.SlugField(max_length=200, unique=True, verbose_name='ссылка')
 
-    # def save(self, *args, **kwargs):
-    #     if not self.slug:  # Генерация slug только если он не установлен
-    #         self.slug = slugify(self.name)
-    #     super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if not self.slug:  # Генерация slug только если он не установлен
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
-    # def get_absolute_url(self):
-    #     return reverse('catalog:category_list',
-    #                    args=[self.slug])
+    def get_absolute_url(self):
+        return reverse('catalog:category_list',
+                       args=[self.slug])
 
     def __str__(self):
         return f'{self.name}'
@@ -53,9 +50,9 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='создан')
     updated = models.DateTimeField(auto_now=True, verbose_name='обновлен')
 
-    # def get_absolute_url(self):
-    #     return reverse('catalog:product_detail',
-    #                    args=[self.id, self.slug])
+    def get_absolute_url(self):
+        return reverse('catalog:product_detail',
+                       args=[self.id, self.slug])
 
     class Meta:
         verbose_name = 'продукт'

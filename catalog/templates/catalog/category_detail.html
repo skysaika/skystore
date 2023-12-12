@@ -1,0 +1,32 @@
+{% extends 'catalog/base.html' %} <!-- наследуемся от catalog/base.html -->
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5">
+                <div class="row">
+                     <div class="col-md-6 offset-md-3">
+                        <div class="card box-shadow">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Категория "{{ object.name }}" ({{ object.slug }})
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    {{ object.description }}
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="btn-group">
+                                    <a href="{% url 'catalog:category_product_list' object.pk %}"
+                                       type="button" class="btn btn-sm btn-outline-primary">К товарам</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

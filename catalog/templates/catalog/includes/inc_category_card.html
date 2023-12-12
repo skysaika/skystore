@@ -1,0 +1,24 @@
+<!-- 'Карточка категорий' -->
+<div class="col-md-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <p class="card-text">{{ object.name }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="{% url 'catalog:category_product_list' object.pk %}"
+                       type="button" class="btn btn-sm btn-outline-primary">К товарам</a>
+                    <a href="{% url 'catalog:category_detail' object.pk %}"
+                       type="button" class="btn btn-sm btn-outline-primary">View</a>
+                    <a href="{% url 'catalog:update_category' object.pk %}"
+                       type="button" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <a href="{% url 'catalog:category_delete' object.pk %}"
+                       type="button" class="btn btn-sm btn-outline-primary">Delete</a>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                    Товаров: {{ object.products.count }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- конец карточки -->
