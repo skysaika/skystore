@@ -4,7 +4,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db import IntegrityError
 from django.db.models import Count
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.text import slugify
 from django.views.generic import ListView, TemplateView, CreateView, DetailView, UpdateView, DeleteView
 
@@ -84,13 +84,10 @@ class CategoryUpdateView(UpdateView):
     model = Category
     template_name = 'catalog/category_form.html'
     fields = '__all__'
-    # success_url = reverse_lazy('catalog:category_list')
-
-    def get_success_url(self):
-        return reverse_lazy('catalog:category_list')
+    success_url = reverse_lazy('catalog:category_list')
 
     def form_valid(self, form):
-        """Метод для генерации slug на основе названия категории"""
+        """Генерация slug на основе названия категории"""
         form.instance.slug = slugify(form.instance.name)
         try:
             return super().form_valid(form)
@@ -111,15 +108,9 @@ class CategoryListView(ListView):
     context_object_name = 'object_list'
     paginate_by = 4
 
-    def get_queryset(self):
-        """Метод для счетчика товаров в категории"""
-        return Category.objects.annotate(product_count=Count('products'))
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['object_list'] = Category.objects.all()
         context['title'] = 'Список категорий'
-        print(context)
         return context
 
 
@@ -151,6 +142,8 @@ class ProductByCategoryView(ListView):
         queryset = Product.objects.filter(category_id=self.kwargs['pk'])
         return queryset
 
+
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Добавляем название категории в контекст
@@ -179,7 +172,7 @@ class ProductCreateView(CreateView):
     success_url = reverse_lazy('catalog:product_list')  # путь до страницы после создания
 
     def form_valid(self, form):
-        """Метод для генерации slug на основе названия продукта"""
+        """Генерация динамического slug на основе названия продукта"""
         form.instance.slug = slugify(form.instance.name)
         try:
             return super().form_valid(form)
@@ -198,7 +191,11 @@ class ProductUpdateView(UpdateView):
     model = Product
     template_name = 'catalog/product_form.html'
     fields = '__all__'
-    success_url = reverse_lazy('catalog:product_list')  # путь до страницы после сохранения
+    # success_url = reverse_lazy('catalog:product_list')  # путь до страницы после сохранения
+
+    def get_success_url(self):
+        """Перенаправляю на страницу продукта"""
+        return reverse('catalog:product_detail', args=[self.kwargs.get('pk')])
 
     def form_valid(self, form):
         """Метод для генерации slug на основе названия продукта"""
