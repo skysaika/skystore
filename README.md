@@ -173,11 +173,27 @@ a-z (обычно в нижнем регистре),
 
 Дополнительное задание, помеченное звездочкой, выполнять желательно, но не обязательно.
 -----------------------------
-- создала приложение myblog -> в settings.py добавила в installed_app = ['myblog']
-- создала модель Post -> миграции
-- в myblog/urls -> пишу шаблон маршрутов по CRUD
-- config/urls добавить строку с include
-path('myblog/', include('myblog.urls', namespace='myblog')),  # путь до приложения myblog
-- в myblog/templates/myblog/base.html, в который загружу пример с сайта бутстрап: Blog
-- создам blogindex
+для 3 задания
+счетчик просмотров:
+- во vlog/views.py в класс class VlogPostDetailView
+- добавить метод:
+    def get_object(self, queryset=None):
+        """Метод для счетчика просмотров"""
+        self.object = super().get_object(queryset)
+        self.object.view_count += 1
+        self.object.save()
+        return self.object
+- в шаблон vlogpost_detail добавить в футер строку:
+ <div>Просмотры: {{ object.view_count }}</div>
+для вывода только опубликованных постов:
+- во vlog/views.py в класс class VlogPostListView
+- добавить метод:
+    def get_queryset(self):
+        """Выводим только опубликованные посты"""
+        return VlogPost.objects.filter(is_published=True)
+для перенаправления после редактирования на страницу созданного поста:
+- во vlog/views.py в class VlogPostUpdateView:
+    def get_success_url(self):
+        """Перенаправление после редактирования на страницу поста"""
+        return reverse('vlog:post_detail', args=[self.kwargs.get('pk')])
 

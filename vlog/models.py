@@ -1,12 +1,11 @@
 import uuid
 
 from django.db import models
-from django.utils.text import slugify
+from pytils.translit import slugify
 
 NULLABLE = {'null': True, 'blank': True}
 
 
-# Create your models here.
 class VlogPost(models.Model):
     """Модель поста"""
     title = models.CharField(max_length=200, verbose_name='Заголовок')
@@ -21,12 +20,21 @@ class VlogPost(models.Model):
         return f'{self.title}'
 
     def save(self, *args, **kwargs):
+        """Метод для генерации slug"""
         if not self.slug:
             # если значение slug не задано, создаем его на основе заголовка статьи и случайного UUID
             self.slug = slugify(self.title) + '-' + str(uuid.uuid4().hex[:6])
             # проверяем, что значение slug уникально
             while VlogPost.objects.filter(slug=self.slug).exists():
                 self.slug = slugify(self.title) + '-' + str(uuid.uuid4().hex[:6])
+        else:
+            # Если slug уже существует (например, при редактировании), обновляем его только в случае изменения заголовка
+            if self.title != VlogPost.objects.get(pk=self.pk).title:
+                new_slug = slugify(self.title) + '-' + str(uuid.uuid4().hex[:6])
+                # проверяем, что новое значение slug уникально
+                while VlogPost.objects.filter(slug=new_slug).exists():
+                    new_slug = slugify(self.title) + '-' + str(uuid.uuid4().hex[:6])
+                self.slug = new_slug
         super(VlogPost, self).save(*args, **kwargs)
 
     class Meta:
