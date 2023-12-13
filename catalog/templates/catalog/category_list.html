@@ -45,7 +45,7 @@
     <!-- карточки категорий -->
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for object in object_list %} <!-- цикл перебирает все объекты -->
-            <!-- внутри цикла или итерации по категориям -->
+            <!-- карточка категорий в подшаблоне -->
             {% include 'catalog/includes/inc_category_card.html' %}
         {% endfor %}
     </div>

@@ -58,7 +58,7 @@ class CategoryCreateView(CreateView):
     """Класс контроллера страницы создания категорий"""
     model = Category
     template_name = 'catalog/category_form.html'
-    fields = '__all__'
+    fields = 'name', 'description'
     # success_url = reverse_lazy('catalog:category_list')
 
     def get_success_url(self):
@@ -83,7 +83,7 @@ class CategoryUpdateView(UpdateView):
     """Класс контроллера страницы редактирования категорий"""
     model = Category
     template_name = 'catalog/category_form.html'
-    fields = '__all__'
+    fields = 'name', 'description'
     success_url = reverse_lazy('catalog:category_list')
 
     def form_valid(self, form):
@@ -168,7 +168,7 @@ class ProductCreateView(CreateView):
     """Класс контроллера страницы создания продукта"""
     model = Product
     template_name = 'catalog/product_form.html'
-    fields = 'category', 'name', 'slug', 'image', 'description', 'price', 'available'
+    fields = 'category', 'name', 'image', 'description', 'price', 'available'
     success_url = reverse_lazy('catalog:product_list')  # путь до страницы после создания
 
     def form_valid(self, form):
@@ -190,7 +190,7 @@ class ProductUpdateView(UpdateView):
     """Класс контроллера страницы редактирования продукта"""
     model = Product
     template_name = 'catalog/product_form.html'
-    fields = '__all__'
+    fields = 'category', 'name', 'image', 'description', 'price', 'available'
     # success_url = reverse_lazy('catalog:product_list')  # путь до страницы после сохранения
 
     def get_success_url(self):
@@ -223,6 +223,7 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     """Класс контроллера страницы карточки продукта"""
     model = Product
+    fields = '__all__'
     template_name = 'catalog/product_detail.html'
     paginate_by = 1  # 1 товар на странице
 
