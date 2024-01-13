@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from pytils.translit import slugify
+from django.core.exceptions import ValidationError
 
 NULLABLE = {'null': True, 'blank': True}
 
@@ -49,6 +50,26 @@ class Product(models.Model):
     available = models.BooleanField(default=True, verbose_name='в наличии')
     created = models.DateTimeField(auto_now_add=True, verbose_name='создан')
     updated = models.DateTimeField(auto_now=True, verbose_name='обновлен')
+
+    def clean(self):
+        super().clean()  # Вызываем clean родительской модели
+    # Проверка на запрещенное слово:
+        forbidden_words = ['казино',
+                           'криптовалюта',
+                           'крипта',
+                           'биржа',
+                           'дешево',
+                           'бесплатно',
+                           'обман',
+                           'полиция',
+                           'радар']
+
+        for word in forbidden_words:
+            if word in self.name.lower():
+                raise ValidationError(f'Название содержит запрещенное слово: {word}')
+
+            if self.description and word in self.description.lower():
+                raise ValidationError(f'Описание содержит запрещенное слово: {word}')
 
     def get_absolute_url(self):
         return reverse('catalog:product_detail',
