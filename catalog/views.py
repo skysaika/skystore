@@ -8,6 +8,7 @@ from django.urls import reverse_lazy, reverse
 from django.utils.text import slugify
 from django.views.generic import ListView, TemplateView, CreateView, DetailView, UpdateView, DeleteView
 
+from catalog.forms import ProductForm
 from catalog.models import Product, Category
 
 
@@ -168,7 +169,7 @@ class ProductCreateView(CreateView):
     """Класс контроллера страницы создания продукта"""
     model = Product
     template_name = 'catalog/product_form.html'
-    fields = 'category', 'name', 'image', 'description', 'price', 'available'
+    form_class = ProductForm
     success_url = reverse_lazy('catalog:product_list')  # путь до страницы после создания
 
     def form_valid(self, form):
@@ -190,7 +191,7 @@ class ProductUpdateView(UpdateView):
     """Класс контроллера страницы редактирования продукта"""
     model = Product
     template_name = 'catalog/product_form.html'
-    fields = 'category', 'name', 'image', 'description', 'price', 'available'
+    form_class = ProductForm
     # success_url = reverse_lazy('catalog:product_list')  # путь до страницы после сохранения
 
     def get_success_url(self):

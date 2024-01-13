@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from slugify import slugify
+from pytils.translit import slugify
 
 NULLABLE = {'null': True, 'blank': True}
 
