@@ -52,8 +52,9 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True, verbose_name='обновлен')
 
     def clean(self):
+        """Валидация формы на запрещенное слово"""
         super().clean()  # Вызываем clean родительской модели
-    # Проверка на запрещенное слово:
+
         forbidden_words = ['казино',
                            'криптовалюта',
                            'крипта',
@@ -87,3 +88,20 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class Version(models.Model):
+    """Модель версия продукта"""
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='versions', verbose_name='продукт')
+    version_number = models.CharField(max_length=10, verbose_name='номер версии')
+    version_name = models.CharField(max_length=200, verbose_name='название версии')
+    active_version = models.BooleanField(default=False, verbose_name='активная версия')
+
+    def __str__(self):
+        return f'{self.version_number}'
+
+    class Meta:
+        verbose_name = 'версия продукта'
+        verbose_name_plural = 'версии продуктов'
+        ordering = ['version_number']
+
