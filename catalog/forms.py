@@ -6,7 +6,7 @@ from catalog.models import Product, Version
 
 
 class StyleFormMixin:
-    """Миксин для форм"""
+    """Миксин для стилизации форм"""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
@@ -49,17 +49,12 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
         model = Version
         fields = '__all__'
 
-    def clean(self):
-        """Метод для проверки доступности продукта"""
-        cleaned_data = super().clean()
-        product = cleaned_data.get("product")
-
-        if not product.available:  # Проверка на доступность продукта
-            raise forms.ValidationError("Нельзя добавить версию для недоступного продукта.")
-
-        # Возвращаем очищенные данные
-        return cleaned_data
-
+    def clean_active_version(self):
+        """Метод для проверки активной версии"""
+        active_version = self.cleaned_data.get('active_version')
+        if len(Version.objects.filter(active_version=True)) > 1 and not active_version:
+            raise ValidationError('Должна быть только одна активная версия')
+        return active_version
 
 
 

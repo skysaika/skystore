@@ -208,22 +208,13 @@ class ProductUpdateView(UpdateView):
         formset = context_data['formset']
         self.object = form.save()
 
-        if formset.is_valid() and form.instance.available:  # Проверка доступности продукта
+        if formset.is_valid():
+            # Если формсет валиден, сохраняем продукт
             formset.instance = self.object
             formset.save()
-
-            # Updated the active version
-            active_version_id = form.cleaned_data.get('active_version')  # Assuming you have a field in ProductForm for selecting the active version
-            if active_version_id:
-                active_version = self.object.versions.get(pk=active_version_id)
-                self.object.active_version = active_version
-                self.object.save()
-
-        else:
-            # Если продукт недоступен, генерируем ValidationError
-            raise ValidationError("Нельзя добавить версию для недоступного продукта.")
-
         return super().form_valid(form)
+
+
 
 
 class ProductListView(ListView):
