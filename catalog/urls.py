@@ -8,15 +8,7 @@ from catalog.views import contact, IndexView, CategoryListView, ProductListView,
 # название приложения
 app_name = CatalogConfig.name
 
-# было
-# urlpatterns = [
-#     path('', index, name='index'),  # путь до главной страницы
-#     path('contact/', contact, name='contact'),  # путь до страницы контактов FBV
-#     path('categories/', categories, name='categories'),  # путь до страницы категорий
-#     path('<int:pk>/product_list/', category_products, name='category_products'),  # продукты по категориям
-#     path('product_list/', product_list, name='product_list'),  # путь до страницы со всеми товарами
 
-# ]
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),  # путь до главной страницы
@@ -35,4 +27,7 @@ urlpatterns = [
     path('product_detail/<int:pk>/', ProductDetailView.as_view(), name='product_detail'),  # карточка продукта
     path('product_edit/<int:pk>/', ProductUpdateView.as_view(), name='product_update'),  # редактирование продукта
     path('product_delete/<int:pk>/', ProductDeleteView.as_view(), name='product_delete'),  # удаление продукта
+
+
+    # path('toggle_availability/<int:pk>/', toggle_availability, name='toggle_availability'),  # переключение статуса
 ]

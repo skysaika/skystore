@@ -41,7 +41,7 @@ class Product(models.Model):
                                  on_delete=models.CASCADE,
                                  verbose_name='категория')  # related_name имя обратной связи от категории к продукту
     name = models.CharField(max_length=200, verbose_name='название')
-    slug = models.SlugField(max_length=200, verbose_name='url')
+    slug = models.SlugField(max_length=200, unique=True, db_index=True, verbose_name='url')
     image = models.ImageField(upload_to='products/', verbose_name='превью', **NULLABLE)
     description = models.TextField(verbose_name='описание', **NULLABLE)
     price = models.DecimalField(max_digits=10,
@@ -51,30 +51,18 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='создан')
     updated = models.DateTimeField(auto_now=True, verbose_name='обновлен')
 
-    def clean(self):
-        """Валидация формы на запрещенное слово"""
-        super().clean()  # Вызываем clean родительской модели
-
-        forbidden_words = ['казино',
-                           'криптовалюта',
-                           'крипта',
-                           'биржа',
-                           'дешево',
-                           'бесплатно',
-                           'обман',
-                           'полиция',
-                           'радар']
-
-        for word in forbidden_words:
-            if word in self.name.lower():
-                raise ValidationError(f'Название содержит запрещенное слово: {word}')
-
-            if self.description and word in self.description.lower():
-                raise ValidationError(f'Описание содержит запрещенное слово: {word}')
 
     def get_absolute_url(self):
         return reverse('catalog:product_detail',
                        args=[self.id, self.slug])
+
+    def save(self, *args, **kwargs):
+        if not self.slug:  # генерировать slug только если он еще не установлен
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def active_version(self):
+        return self.versions.filter(active_version=True).first()
 
     class Meta:
         verbose_name = 'продукт'
@@ -93,15 +81,15 @@ class Product(models.Model):
 class Version(models.Model):
     """Модель версия продукта"""
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='versions', verbose_name='продукт')
-    version_number = models.CharField(max_length=10, verbose_name='номер версии')
+    version_number = models.IntegerField(max_length=10, default=1, verbose_name='номер версии')
     version_name = models.CharField(max_length=200, verbose_name='название версии')
     active_version = models.BooleanField(default=False, verbose_name='активная версия')
 
     def __str__(self):
-        return f'{self.version_number}'
+        return f'{self.active_version} {self.version_number} {self.version_name}'
 
     class Meta:
         verbose_name = 'версия продукта'
         verbose_name_plural = 'версии продуктов'
-        ordering = ['version_number']
+
 

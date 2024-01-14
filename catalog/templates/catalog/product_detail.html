@@ -18,6 +18,8 @@
         </nav>
     {% endif %}
     <!-- пагинация категорий конец -->
+
+    <!--детальная карточка продукта в виде таблицы-->
     <div class="container">
         <div class="row">
             <div class="col-6">
@@ -46,6 +48,18 @@
                                 <td>{{ object.price }}</td>
                             </tr>
                             <tr>
+                                <td>Активная версия</td>
+                                <td>
+                                    {% for version in object.versions.all %}
+                                        {% if version.active_version %}
+                                            {{ version.version_number }} {{ version.version_name }}
+                                        {% endif %}
+                                    {% empty %}
+                                        Нет активной версии
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>Статус</td>
                                 <td style="{% if object.available %} color: green; {% else %} color: red; {% endif %}">
                                     {% if object.available %}
@@ -55,6 +69,16 @@
                                     {% endif %}
                                 </td>
                             </tr>
+{#                            <tr>#}
+{#                                <td>Активатор</td>#}
+{#                                <td>#}
+{#                                    {% if object.available %}#}
+{#                                        <a href="{% url 'catalog:toggle_availability' object.pk %}" class="btn btn-warning">Деактивировать</a>#}
+{#                                    {% else %}#}
+{#                                        <a href="{% url 'catalog:toggle_availability' object.pk %}" class="btn btn-success">Активировать</a>#}
+{#                                    {% endif %}#}
+{#                                </td>#}
+{#                            </tr>#}
                         </table>
                     </div>
                     <div class="card-footer"></div>

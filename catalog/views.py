@@ -1,15 +1,17 @@
 import random
+
+from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-from django.db import IntegrityError
-from django.db.models import Count
-from django.shortcuts import render
+from django.db import IntegrityError, transaction
+from django.forms import inlineformset_factory
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.text import slugify
 from django.views.generic import ListView, TemplateView, CreateView, DetailView, UpdateView, DeleteView
 
-from catalog.forms import ProductForm
-from catalog.models import Product, Category
+from catalog.forms import ProductForm, VersionForm
+from catalog.models import Product, Category, Version
 
 
 class IndexView(TemplateView):
@@ -143,8 +145,6 @@ class ProductByCategoryView(ListView):
         queryset = Product.objects.filter(category_id=self.kwargs['pk'])
         return queryset
 
-
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Добавляем название категории в контекст
@@ -172,40 +172,58 @@ class ProductCreateView(CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product_list')  # путь до страницы после создания
 
-    def form_valid(self, form):
-        """Генерация динамического slug на основе названия продукта"""
-        form.instance.slug = slugify(form.instance.name)
-        try:
-            return super().form_valid(form)
-        except IntegrityError:
-            form.add_error('name', 'Товар с таким названием уже существует.')
-            return self.form_invalid(form)
-
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Создание продукта'
-        return context
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'Создание продукта'
 
+        return context_data
+
+# ProductUpdateView -> не забыть вставить instance=self.object
 
 class ProductUpdateView(UpdateView):
     """Класс контроллера страницы редактирования продукта"""
     model = Product
     template_name = 'catalog/product_form.html'
     form_class = ProductForm
-    # success_url = reverse_lazy('catalog:product_list')  # путь до страницы после сохранения
+    # success_url = reverse_lazy('catalog:product_detail')  # путь до страницы после сохранения
 
     def get_success_url(self):
         """Перенаправляю на страницу продукта"""
-        return reverse('catalog:product_detail', args=[self.kwargs.get('pk')])
+        return reverse_lazy('catalog:product_detail', args=[self.kwargs.get('pk')])
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'Редактирование продукта'
+
+        VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+        if self.request.method == 'POST':
+            context_data['formset'] = VersionFormset(self.request.POST, instance=self.object)
+        else:
+            context_data['formset'] = VersionFormset(instance=self.object)
+        return context_data
 
     def form_valid(self, form):
-        """Метод для генерации slug на основе названия продукта"""
-        form.instance.slug = slugify(form.instance.name)
-        try:
-            return super().form_valid(form)
-        except IntegrityError:
-            form.add_error('name', 'Товар с таким названием уже существует.')
-            return self.form_invalid(form)
+        """ВАлидация формсета и сохранение продукта"""
+        context_data = self.get_context_data()
+        formset = context_data['formset']
+        self.object = form.save()
+
+        if formset.is_valid() and form.instance.available:  # Проверка доступности продукта
+            formset.instance = self.object
+            formset.save()
+
+            # Updated the active version
+            active_version_id = form.cleaned_data.get('active_version')  # Assuming you have a field in ProductForm for selecting the active version
+            if active_version_id:
+                active_version = self.object.versions.get(pk=active_version_id)
+                self.object.active_version = active_version
+                self.object.save()
+
+        else:
+            # Если продукт недоступен, генерируем ValidationError
+            raise ValidationError("Нельзя добавить версию для недоступного продукта.")
+
+        return super().form_valid(form)
 
 
 class ProductListView(ListView):
@@ -216,9 +234,9 @@ class ProductListView(ListView):
     paginate_by = 3  # 3 товара на странице
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Все товары'
-        return context
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'Все товары'
+        return context_data
 
 
 class ProductDetailView(DetailView):
@@ -257,3 +275,14 @@ class ProductDeleteView(DeleteView):
     model = Product
     template_name = 'catalog/product_confirm_delete.html'
     success_url = reverse_lazy('catalog:product_list')
+
+#пока оставлю, потом может пригодится
+# def toggle_availability(request, pk):
+#     """Переключатель доступности продукта"""
+#     product_item = get_object_or_404(Product, pk=pk)
+#     if product_item.available:
+#         product_item.available = False
+#     else:
+#         product_item.available = True
+#     product_item.save()
+#     return redirect(reverse('catalog:product_list'))
