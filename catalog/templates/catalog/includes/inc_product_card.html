@@ -9,11 +9,28 @@
             <img src="/media/no_image.png" />  <!-- используем no_image.png из папки media -->
         {% endif %}
         <div class="card-body">
-        {% if object.available %}
-            <p class="card-text">{{ object }}</p>  <!--|title сможет сделать все названия с заглавной буквы -->
-        {% else %}
-            <p class="card-text text-muted">{{ object }}</p>
-        {% endif %}
+            {% if object.available %}
+                <p class="card-text">{{ object }}</p>  <!-- если в наличии -->
+            {% else %}
+                <p class="card-text text-muted">{{ object }}</p>
+            {% endif %}
+            <!--только активная версия продукта-->
+            {% if object.versions.all %}
+                {% for version in object.versions.all %}
+                    {% if version.active_version %}
+                        <p class="card-text">Версия: {{ version.version_number }} {{ version.version_name }}
+                            <span style="float: right;"> Цена: {{ object.price }}</span></p>
+                    {% endif %}
+                {% endfor %}
+                {% if not object.versions.all.0.active_version %}
+                    <p class="card-text">Нет активной версии
+                        <span style="float: right;"> Цена: {{ object.price }}</span></p>
+                {% endif %}
+            {% else %}
+                <p class="card-text">Нет активной версии
+                    <span style="float: right;"> Цена: {{ object.price }}</span></p>
+            {% endif %}
+
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                     <a  href="{% url 'catalog:product_detail' object.pk %}"
