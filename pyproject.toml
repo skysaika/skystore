@@ -7,13 +7,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11.2"
-django = "^4.2.7"
+django = "^4.2.9"
 pillow = "^10.1.0"
 ipython = "^8.18.1"
 psycopg2-binary = "^2.9.9"
 pytils = "^0.4.1"
 python-dotenv = "^1.0.0"
 python-slugify = "^8.0.1"
+
 
 
 [build-system]
