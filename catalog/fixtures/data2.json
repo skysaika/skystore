@@ -1,0 +1,340 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Чай",
+      "description": "",
+      "slug": "chaj"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Напитки",
+      "description": "",
+      "slug": "napitki"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Лакомства",
+      "description": "",
+      "slug": "lakomstva"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "name": "Подарки",
+      "description": "",
+      "slug": "podarki"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+      "name": "Новинки",
+      "description": "",
+      "slug": "novinki"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+      "name": "Bady",
+      "description": "",
+      "slug": "bady"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+      "name": "Коктейли",
+      "description": "Коктейли для смарт питания",
+      "slug": "kokteili"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "name": "Чай зеленый",
+      "slug": "chaj-zelenyij",
+      "image": "products/green_tea.jpg",
+      "description": "Чай Enerwood Every Classic — это композиции чая, дополненные уникальными нотками, подчеркивающими классический вкус и создающими гармонию удовольствия и пользы. В каждый чай добавлен уже известный своими уникальными свойствами адаптогена гриб рейши, а также гриб кордицепс.\r\nОригинальный, чуть вяжущий китайский зеленый чай дополнен ярким вкусом черной смородины и искристой свежестью мяты. Прекрасный источник витаминов и антиоксидантов на каждый день",
+      "price": "5.00",
+      "available": false,
+      "created": "2023-12-12T18:21:48.353Z",
+      "updated": "2024-01-14T17:35:39.890Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "name": "Чай красный",
+      "slug": "chaj-krasnyij",
+      "image": "products/red_tea.jpg",
+      "description": "Чай Enerwood Every Classic — это композиции чая, дополненные уникальными нотками, подчеркивающими классический вкус и создающими гармонию удовольствия и пользы. В каждый чай добавлен уже известный своими уникальными свойствами адаптогена гриб рейши, а также гриб кордицепс.\r\nЯркий чай насыщенного рубинового цвета с кисло-сладким вкусом дополнен летней свежестью малины и спелых яблок, пряной сладостью солодки и утонченным ароматом шиповника. Он прекрасно утоляет жажду, снимает нервное напряжение и наполняет жизненной энергией.",
+      "price": "5.00",
+      "available": true,
+      "created": "2023-12-12T18:23:07.781Z",
+      "updated": "2024-01-14T16:45:56.353Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "category": 2,
+      "name": "Super Fruit Drink «Апельсин-имбирь»",
+      "slug": "super-fruit-drink",
+      "image": "products/super_fruit_drink_orange_ginger.jpg",
+      "description": "\"Super Fruit Drink — это комплекс растительных компонентов с высоким содержанием витаминов и минералов, которые помогают поддержать защитную функцию организма, жизненный тонус и активность. Это отличная группа поддержки для тех, кто заботится о здоровье и не желает снижать свой темп жизни во время сезона гриппа и простуды!",
+      "price": "4.50",
+      "available": true,
+      "created": "2023-12-12T18:25:18.759Z",
+      "updated": "2024-01-14T17:28:41.463Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "category": 3,
+      "name": "Батончик «Пралине с грецким орехом»",
+      "slug": "batonchik-praline-s-gretskim-orehom",
+      "image": "products/batonchik_praline.jpg",
+      "description": "Батончик Energy Life «Пралине с грецким орехом» — глубокий вкус темного шоколада с легкой горчинкой грецкого ореха.",
+      "price": "4.40",
+      "available": true,
+      "created": "2023-12-12T18:26:31.992Z",
+      "updated": "2024-01-14T17:35:18.328Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "category": 4,
+      "name": "Гречишный чай \"White Holiday\"",
+      "slug": "white-holiday",
+      "image": "products/grechishny_tea.jpg",
+      "description": "\"Зарядитесь магией праздника! Попробуйте изысканный купаж гречишного чая, вдохновленный согревающим и ароматным белым глинтвейном. Оригинальный цвет и тонкий вкус напитка – идеальное дополнение для уютных зимних вечеров, неспешных задушевных разговоров, сокровенных мечтаний и умиротворения под теплым пледом.",
+      "price": "6.25",
+      "available": true,
+      "created": "2023-12-12T18:27:37.576Z",
+      "updated": "2024-01-14T16:36:47.913Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "category": 5,
+      "name": "Biotuning",
+      "slug": "biotuning",
+      "image": "products/biotuning.jpg",
+      "description": "Инновационный адаптоген для smart-настройки организма на энергию, сохранение здоровья, красоты и молодости. Помогает быстро восстанавливаться после интенсивных нагрузок, адаптирует организм к различным видам стрессов, улучшает работу ЖКТ.\r\n\r\nНе содержит лактозу, глютен, ГМО.",
+      "price": "31.70",
+      "available": true,
+      "created": "2023-12-12T18:42:50.598Z",
+      "updated": "2024-01-14T17:13:54.931Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+      "category": 6,
+      "name": "Lactoferra",
+      "slug": "lactoferra",
+      "image": "products/lactoferra.jpg",
+      "description": "Активный натуральный комплекс, содержащий иммуноглобулины и лактоферрин. Помогает восстановить и укрепить иммунитет, защитить организм от вирусов и бактерий, улучшает процессы регенерации тканей, способствует лучшему усвоению железа.",
+      "price": "21.47",
+      "available": true,
+      "created": "2023-12-12T19:38:06.771Z",
+      "updated": "2024-01-14T17:29:29.358Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+      "category": 7,
+      "name": "ED Smart Milky «Кофе с молоком», 15 порций",
+      "slug": "ed-smart-milky-15",
+      "image": "products/ed_smart_milky.jpg",
+      "description": "Коктейль с насыщенным ароматом кофе и нежностью молока подарит не только вкусовое наслаждение, но и даст всё необходимое, чтобы быть продуктивным и с легкостью встречать новые вызовы.\r\nВ каждом саше выверенный баланс питательных веществ. Для приготовления воздушного и ароматного коктейля нужны только вода и шейкер! \r\nEASY FOOD. Просто ешь.",
+      "price": "26.02",
+      "available": true,
+      "created": "2023-12-13T15:21:24.451Z",
+      "updated": "2024-01-14T17:29:41.069Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 11,
+    "fields": {
+      "category": 5,
+      "name": "Test",
+      "slug": "test",
+      "image": "products/no_image.png",
+      "description": "test",
+      "price": "15.00",
+      "available": true,
+      "created": "2024-01-13T20:34:08.494Z",
+      "updated": "2024-01-14T17:34:18.561Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 15,
+    "fields": {
+      "category": 5,
+      "name": "тест4",
+      "slug": "test4",
+      "image": "products/no_image_MwrcSNo.png",
+      "description": "тест4",
+      "price": "1.00",
+      "available": true,
+      "created": "2024-01-14T12:50:07.791Z",
+      "updated": "2024-01-20T09:20:32.852Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 16,
+    "fields": {
+      "category": 5,
+      "name": "test5",
+      "slug": "test5",
+      "image": "products/no_image_4NCGU9I.png",
+      "description": "test5",
+      "price": "10.00",
+      "available": true,
+      "created": "2024-01-14T17:13:22.312Z",
+      "updated": "2024-01-20T09:20:10.133Z"
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 28,
+    "fields": {
+      "product": 15,
+      "version_number": 1,
+      "version_name": "v",
+      "active_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 31,
+    "fields": {
+      "product": 11,
+      "version_number": 1,
+      "version_name": "v",
+      "active_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 32,
+    "fields": {
+      "product": 5,
+      "version_number": 1,
+      "version_name": "n",
+      "active_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 33,
+    "fields": {
+      "product": 2,
+      "version_number": 1,
+      "version_name": "v",
+      "active_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 34,
+    "fields": {
+      "product": 6,
+      "version_number": 2,
+      "version_name": "new",
+      "active_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 35,
+    "fields": {
+      "product": 3,
+      "version_number": 1,
+      "version_name": "v",
+      "active_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 36,
+    "fields": {
+      "product": 7,
+      "version_number": 1,
+      "version_name": "v",
+      "active_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 37,
+    "fields": {
+      "product": 8,
+      "version_number": 1,
+      "version_name": "v",
+      "active_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 38,
+    "fields": {
+      "product": 16,
+      "version_number": 2,
+      "version_name": "m",
+      "active_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 39,
+    "fields": {
+      "product": 4,
+      "version_number": 10,
+      "version_name": "moscow",
+      "active_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 40,
+    "fields": {
+      "product": 1,
+      "version_number": 1,
+      "version_name": "n",
+      "active_version": true
+    }
+  }
+]

@@ -1,0 +1,301 @@
+[
+  {
+    "model": "vlog.vlogpost",
+    "pk": 3,
+    "fields": {
+      "title": "New test",
+      "slug": "new-test",
+      "content": "new test",
+      "preview": "",
+      "created": "2023-12-12T21:26:18.791Z",
+      "is_published": true,
+      "view_count": 0
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 4,
+    "fields": {
+      "title": "new test2",
+      "slug": "new-test-2",
+      "content": "new test 2",
+      "preview": "",
+      "created": "2023-12-12T21:27:34.865Z",
+      "is_published": true,
+      "view_count": 0
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 5,
+    "fields": {
+      "title": "Я хочу понять",
+      "slug": "ya-hochu-ponyat",
+      "content": "что происходит",
+      "preview": "",
+      "created": "2023-12-12T21:41:04.122Z",
+      "is_published": true,
+      "view_count": 0
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 6,
+    "fields": {
+      "title": "Новые люди",
+      "slug": "novye-ludi",
+      "content": "Новые люди",
+      "preview": "",
+      "created": "2023-12-12T21:53:59.039Z",
+      "is_published": true,
+      "view_count": 0
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 7,
+    "fields": {
+      "title": "Все те же люди",
+      "slug": "vse-te-zhe-ludi",
+      "content": "Новые люди - это у кого старые знакомые",
+      "preview": "",
+      "created": "2023-12-12T21:55:07.636Z",
+      "is_published": true,
+      "view_count": 0
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 8,
+    "fields": {
+      "title": "Galactica for us",
+      "slug": "galactica-for-us",
+      "content": "галактика для нас",
+      "preview": "",
+      "created": "2023-12-12T22:08:59.356Z",
+      "is_published": true,
+      "view_count": 0
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 9,
+    "fields": {
+      "title": "Тестовый пост для проверки",
+      "slug": "testovy-post-dlya-proverki",
+      "content": "/;<aknf;<jebfv",
+      "preview": "",
+      "created": "2023-12-13T12:38:56.536Z",
+      "is_published": true,
+      "view_count": 0
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 10,
+    "fields": {
+      "title": "просто пост",
+      "slug": "prosto-post",
+      "content": "просто пост",
+      "preview": "",
+      "created": "2023-12-13T12:51:57.536Z",
+      "is_published": true,
+      "view_count": 8
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 11,
+    "fields": {
+      "title": "Снова поставь слаг",
+      "slug": "-655b53",
+      "content": "И вместе нам приснится",
+      "preview": "",
+      "created": "2023-12-13T13:35:33.736Z",
+      "is_published": true,
+      "view_count": 5
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 12,
+    "fields": {
+      "title": "С днем рождения!",
+      "slug": "s-dnem-rozhdeniya-94a563",
+      "content": "тебя дед мороз",
+      "preview": "",
+      "created": "2023-12-13T13:39:32.144Z",
+      "is_published": true,
+      "view_count": 4
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 14,
+    "fields": {
+      "title": "Новый новый пост",
+      "slug": "novyij-novyij-post-0c2363",
+      "content": "и все про то же самое",
+      "preview": "",
+      "created": "2023-12-13T13:47:51.865Z",
+      "is_published": true,
+      "view_count": 1
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 15,
+    "fields": {
+      "title": "Совсем новый пост",
+      "slug": "sovsem-novyij-post-90f1b8",
+      "content": "и все про тот же слаг",
+      "preview": "",
+      "created": "2023-12-13T13:53:21.614Z",
+      "is_published": true,
+      "view_count": 1
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 16,
+    "fields": {
+      "title": "Скоро Сатрый Новый год",
+      "slug": "skoro-satryij-novyij-god",
+      "content": "старый то есть",
+      "preview": "",
+      "created": "2023-12-13T13:56:04.065Z",
+      "is_published": true,
+      "view_count": 0
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 18,
+    "fields": {
+      "title": "проверка связи",
+      "slug": "proverka-svyazi",
+      "content": "что -то там",
+      "preview": "",
+      "created": "2023-12-13T14:02:01.787Z",
+      "is_published": true,
+      "view_count": 1
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 19,
+    "fields": {
+      "title": "проверка связи",
+      "slug": "proverka-svyazi-d88491",
+      "content": "что -то там",
+      "preview": "",
+      "created": "2023-12-13T14:03:32.949Z",
+      "is_published": true,
+      "view_count": 0
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 20,
+    "fields": {
+      "title": "Скоро Сатрый Новый год",
+      "slug": "skoro-satryij-novyij-god-25d8fe",
+      "content": "старый то есть",
+      "preview": "",
+      "created": "2023-12-13T14:04:00.539Z",
+      "is_published": true,
+      "view_count": 2
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 22,
+    "fields": {
+      "title": "будь что будет",
+      "slug": "chto-to-takoe-neprostoe-f8cbcd",
+      "content": "давайте",
+      "preview": "",
+      "created": "2023-12-13T14:06:53.043Z",
+      "is_published": false,
+      "view_count": 1
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 23,
+    "fields": {
+      "title": "что-то такое непростое",
+      "slug": "chto-to-takoe-neprostoe-d221ac",
+      "content": "давайте",
+      "preview": "",
+      "created": "2023-12-13T14:06:55.423Z",
+      "is_published": true,
+      "view_count": 1
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 26,
+    "fields": {
+      "title": "совсем новый пост",
+      "slug": "sovsem-novyij-post-2e3b7f",
+      "content": "давайте",
+      "preview": "",
+      "created": "2023-12-13T14:07:46.012Z",
+      "is_published": true,
+      "view_count": 7
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 27,
+    "fields": {
+      "title": "чуть новее пост",
+      "slug": "chut-novee-post-fba1f2",
+      "content": "",
+      "preview": "",
+      "created": "2023-12-13T14:08:56.322Z",
+      "is_published": false,
+      "view_count": 7
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 28,
+    "fields": {
+      "title": "Это не Новый год, а Китайский Новый год",
+      "slug": "eto-ne-novyij-god-a-kitajskij-novyij-god-dca2c8",
+      "content": "ханукия",
+      "preview": "",
+      "created": "2023-12-13T14:27:52.087Z",
+      "is_published": true,
+      "view_count": 6
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 29,
+    "fields": {
+      "title": "Самые популярные посты на новый Год 2024",
+      "slug": "samyie-populyarnyie-postyi-na-novyij-god-2024-9c01e3",
+      "content": "Все посты о том, что приготовить",
+      "preview": "",
+      "created": "2023-12-26T16:16:50.320Z",
+      "is_published": true,
+      "view_count": 6
+    }
+  },
+  {
+    "model": "vlog.vlogpost",
+    "pk": 30,
+    "fields": {
+      "title": "test post number n",
+      "slug": "test-post-number-n-d63ea2",
+      "content": "some text 20.01.24",
+      "preview": "",
+      "created": "2024-01-20T11:14:30.546Z",
+      "is_published": true,
+      "view_count": 0
+    }
+  }
+]
