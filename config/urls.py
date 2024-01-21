@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('catalog.urls', namespace='catalog')),  # путь до приложения catalog
     path('vlog/', include('vlog.urls', namespace='vlog')),  # путь до приложения vlog
+    path('users/', include('users.urls', namespace='users')),  # маршрут до приложения users
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
