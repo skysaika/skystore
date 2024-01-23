@@ -69,16 +69,16 @@
                                     {% endif %}
                                 </td>
                             </tr>
-{#                            <tr>#}
-{#                                <td>Активатор</td>#}
-{#                                <td>#}
-{#                                    {% if object.available %}#}
-{#                                        <a href="{% url 'catalog:toggle_availability' object.pk %}" class="btn btn-warning">Деактивировать</a>#}
-{#                                    {% else %}#}
-{#                                        <a href="{% url 'catalog:toggle_availability' object.pk %}" class="btn btn-success">Активировать</a>#}
-{#                                    {% endif %}#}
-{#                                </td>#}
-{#                            </tr>#}
+                            <tr>
+                                <td>Пользователь</td>
+                                <td>
+                                    {% if object.owner %}
+                                        {{ object.owner }}
+                                    {% else %}
+                                        Нет пользователя
+                                    {% endif %}
+                                </td>
+                            </tr>
                         </table>
                     </div>
                     <div class="card-footer"></div>

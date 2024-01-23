@@ -172,6 +172,13 @@ class ProductCreateView(CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product_list')  # путь до страницы после создания
 
+    def form_valid(self, form):
+        """Создаваемый продукт принадлежит текущему пользователю"""
+        self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         context_data['title'] = 'Создание продукта'
