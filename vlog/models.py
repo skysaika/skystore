@@ -13,7 +13,7 @@ class VlogPost(models.Model):
     content = models.TextField(blank=True, verbose_name='Содержимое')
     preview = models.ImageField(upload_to='blog/', verbose_name='Превью', **NULLABLE)
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
-    is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
+    is_published = models.BooleanField(default=False, verbose_name='Опубликовано')
     view_count = models.PositiveIntegerField(default=0, verbose_name='Просмотры')
 
     def __str__(self):
@@ -41,3 +41,6 @@ class VlogPost(models.Model):
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
         ordering = ['-created']
+        permissions = [
+            ('can_publish', 'Может опубликовать'),
+        ]
