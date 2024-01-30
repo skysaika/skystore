@@ -53,7 +53,10 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True, verbose_name='обновлен')
 
     # связь с текущим юзером
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='владелец')  # связь продукта к пользователю
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='владелец')
+
+    # признак публикации
+    is_published = models.BooleanField(default=False, verbose_name='опубликован')
 
 
     def get_absolute_url(self):
@@ -77,6 +80,9 @@ class Product(models.Model):
             models.Index(fields=['name']),
             models.Index(fields=['-created']),
         ]
+        permissions = (
+            ('can_publish', 'Может публиковать'),
+        )
 
     def __str__(self):
         return f'{self.name}'
