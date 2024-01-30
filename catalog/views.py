@@ -23,7 +23,8 @@ class IndexView(TemplateView):
         """Метод GET для главной страницы"""
         context = {}
         available_products = Product.objects.filter(available=True)
-        random_products = random.sample(list(available_products), min(3, len(available_products)))
+        # random_products = random.sample(list(available_products), min(3, len(available_products)))
+        random_products = Product.objects.filter(available=True).order_by('?')[:3]
         context['title'] = 'Главная страница'
 
         # Пагинация продуктов
