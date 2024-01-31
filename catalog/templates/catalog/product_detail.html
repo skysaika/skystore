@@ -108,7 +108,19 @@
                             <img src="/media/no_image.png" class="img-fluid" alt="no_image"/>
                         {% endif %}
                     </div>
-                    <div class="card-footer"></div>
+                    <div class="card-footer">
+                         <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    {% if is_owner %}
+                    <a  href="{% url 'catalog:product_update' object.pk %}"
+                        class="btn btn-sm btn-outline-secondary">Edit</a>
+
+                    <a  href="{% url 'catalog:product_delete' object.pk %}"
+                        class="btn btn-sm btn-outline-danger">Delete</a>
+                    {% endif %}
+                </div>
+
+                    </div>
                 </div>
             </div>
         </div>

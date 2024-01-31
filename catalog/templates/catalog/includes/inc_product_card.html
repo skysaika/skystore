@@ -35,10 +35,7 @@
                 <div class="btn-group">
                     <a  href="{% url 'catalog:product_detail' object.pk %}"
                         class="btn btn-sm btn-outline-primary">View</a>
-                    <a  href="{% url 'catalog:product_update' object.pk %}"
-                        class="btn btn-sm btn-outline-secondary">Edit</a>
-                    <a  href="{% url 'catalog:product_delete' object.pk %}"
-                        class="btn btn-sm btn-outline-danger">Delete</a>
+
                 </div>
                 <small class="text-body-secondary" id="availabilityText">
                     {% if object %}
