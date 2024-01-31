@@ -51,10 +51,8 @@ class Product(models.Model):
     available = models.BooleanField(default=True, verbose_name='в наличии')
     created = models.DateTimeField(auto_now_add=True, verbose_name='создан')
     updated = models.DateTimeField(auto_now=True, verbose_name='обновлен')
-
     # связь с текущим юзером
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='владелец')
-
     # признак публикации
     is_published = models.BooleanField(default=False, verbose_name='опубликован')
 

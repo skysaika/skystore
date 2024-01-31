@@ -16,10 +16,10 @@ class CategoryAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     """Админка модели Продукт"""
     list_display = ['name', 'pk', 'slug', 'price', 'category',
-                    'available', 'created', 'updated']
-    list_filter = ['category', 'available', 'created', 'updated']
+                    'available', 'created', 'updated', 'owner', 'is_published']
+    list_filter = ['category', 'available', 'created', 'updated', 'owner', 'is_published']
     search_fields = ['name', 'slug', 'description']
-    list_editable = ['price', 'available']
+    list_editable = ['price', 'available', 'is_published', 'owner']
     prepopulated_fields = {'slug': ('name',)}
 
 

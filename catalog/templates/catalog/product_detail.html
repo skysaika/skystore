@@ -70,12 +70,22 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Пользователь</td>
+                                <td>Владелец</td>
                                 <td>
                                     {% if object.owner %}
                                         {{ object.owner }}
                                     {% else %}
                                         Нет пользователя
+                                    {% endif %}
+                                </td>
+                            </tr>
+                         <tr>
+                                <td>Опубликован</td>
+                                <td>
+                                    {% if object.is_published %}
+                                        Опубликован
+                                    {% else %}
+                                        Не опубликован
                                     {% endif %}
                                 </td>
                             </tr>

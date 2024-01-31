@@ -18,7 +18,7 @@ class StyleFormMixin:
 
 
 class ProductForm(StyleFormMixin, forms.ModelForm):
-    """Форма создания продукта"""
+    """Запрет в форме списка слов, запрещенных для продукта"""
     forbidden_words = ['казино', 'криптовалюта', 'крипта',
                        'биржа', 'дешево', 'бесплатно',
                        'обман', 'полиция', 'радар'
@@ -27,7 +27,7 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
         model = Product
         #только 1 вариант:
         #fields = '__all__'
-        fields = ('category', 'name', 'image', 'description', 'price', 'available')
+        fields = ('category', 'name', 'image', 'description', 'price', 'available', 'owner', 'is_published')
         #exclude = ('slug',)
 
     def clean_name(self):
