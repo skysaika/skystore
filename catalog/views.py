@@ -5,6 +5,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from django.db import IntegrityError, transaction
 from django.forms import inlineformset_factory
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.text import slugify
@@ -195,9 +196,22 @@ class ProductUpdateView(UpdateView):
     form_class = ProductForm
     # success_url = reverse_lazy('catalog:product_detail')  # путь до страницы после сохранения
 
+
     def get_success_url(self):
         """Перенаправляю на страницу продукта"""
         return reverse_lazy('catalog:product_detail', args=[self.kwargs.get('pk')])
+
+    def get_object(self, queryset=None):
+        """Получаем продукт и проверяем его владельца"""
+        self.object = super().get_object()
+        # проверим, что модератор может редактировать этот продукт
+        if self.request.user.has_perm('catalog.change_product'):
+            return self.object
+        if self.object.owner != self.request.user:
+            raise Http404('Вы не являетесь владельцем этого продукта')
+        return self.object
+
+
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -260,6 +274,10 @@ class ProductDetailView(DetailView):
             products = paginator.page(1)
         except EmptyPage:
             products = paginator.page(paginator.num_pages)
+
+        self.object = super().get_object()
+        if self.object.owner == self.request.user or self.request.user.has_perm('catalog.change_product'):
+            context['is_owner'] = True
 
         context['products'] = products
         context['paginator'] = paginator
