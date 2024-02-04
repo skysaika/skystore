@@ -275,6 +275,7 @@ class ProductDetailView(DetailView):
         except EmptyPage:
             products = paginator.page(paginator.num_pages)
 
+        # Проверка владельца
         self.object = super().get_object()
         if self.object.owner == self.request.user or self.request.user.has_perm('catalog.change_product'):
             context['is_owner'] = True

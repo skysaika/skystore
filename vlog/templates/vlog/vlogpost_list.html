@@ -34,8 +34,9 @@
     <div class="container">
         <div class="row">
             <div class="col-12 mb-5">
-                <!-- кнопка добавления поста -->
-                <a class="btn btn-outline-primary" href="{% url 'vlog:create_post' %}">Добавить пост</a>
+
+               <a class="btn btn-outline-primary" href="{% url 'vlog:create_post' %}">Добавить пост</a>
+
             </div>
         </div>
     </div>
@@ -44,18 +45,29 @@
             <div class="col-md-3 mb-3">
                 <div class="card box-shadow">
                     <div class="card-body">
-                        <p class="-text">
+                        <p class="-text" style="text-align: center; color: black;">
                             {{ object|title }}
                         </p>
+                        <p class="card-text">
+                            {{ object.content }}
+                        </p>
+                        <p class="text-muted">Автор: {{ object.owner }}</p>
+
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a  href="{% url 'vlog:post_detail' object.pk %}"
                                     class="btn btn-sm btn-outline-primary">View</a>
-                                <a  href="{% url 'vlog:edit_post' object.pk %}"
-                                class="btn btn-sm btn-outline-secondary">Edit</a>
-                                <a  href="{% url 'vlog:delete_post' object.pk %}"
-                                    class="btn btn-sm btn-outline-danger">Delete</a>
                             </div>
+                            <small class="text-body-secondary" id="availabilityText">
+                                {% if object %}
+                                    {% if object.is_published %}
+                                        <span style="color: green;">Опубликовано</span>
+                                    {% else %}
+                                        <span style="color: grey;">Не опубликовано</span>
+                                    {% endif %}
+                                {% endif %}
+                            </small>
+                            <small class="text-body-secondary">Просмотры: {{ object.view_count }}</small>
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,12 @@
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <div>Просмотры: {{ object.view_count }}</div>
                         <div class="btn-group">
-                            <a href="{% url 'vlog:post_list' %}" class="btn btn-sm btn-outline-primary">К постам</a>
+                            <a href="{% url 'vlog:post_list' %}"
+                               class="btn btn-sm btn-outline-primary">К постам</a>
+                              <a  href="{% url 'vlog:edit_post' object.pk %}"
+                                class="btn btn-sm btn-outline-secondary">Edit</a>
+                                <a  href="{% url 'vlog:delete_post' object.pk %}"
+                                    class="btn btn-sm btn-outline-danger">Delete</a>
                         </div>
                     </div>
                 </div>

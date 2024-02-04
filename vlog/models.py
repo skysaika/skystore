@@ -1,5 +1,6 @@
 import uuid
 
+from django.conf import settings
 from django.db import models
 from pytils.translit import slugify
 
@@ -15,6 +16,9 @@ class VlogPost(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     is_published = models.BooleanField(default=False, verbose_name='Опубликовано')
     view_count = models.PositiveIntegerField(default=0, verbose_name='Просмотры')
+
+    # связь с текущим юзером
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='владелец')
 
     def __str__(self):
         return f'{self.title}'
