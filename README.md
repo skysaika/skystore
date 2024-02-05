@@ -311,3 +311,17 @@ self.request.user.
 Дополнительное задание, помеченное звездочкой, желательно,
 но не обязательно выполнять.
 
+# cache настройки
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
+}
+# если закрыт аавторизацией, то:
+"LOCATION": "redis://username:password@127.0.0.1:6379",
+# установи redis
+pip(pip3) install redis
+
+
