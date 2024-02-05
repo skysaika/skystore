@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 import random
 from django.contrib.auth.views import LoginView as BaseLoginView
@@ -9,6 +10,7 @@ from django.views.generic import CreateView, UpdateView
 
 from users.forms import UserRegisterForm, UserForm
 from users.models import User
+from users.services import send_new_password
 
 
 class LoginView(BaseLoginView):
@@ -48,17 +50,12 @@ class UserUpdateView(UpdateView):
         """Метод редактирует текущего пользователя без использваония pk"""
         return self.request.user
 
-
+@login_required
 def generate_new_password(request):
     """Функция генерации пароля"""
     new_password = ''.join([str(random.randint(0, 9)) for _ in range(12)])
-    # отправка письма с новым паролем:
-    send_mail(
-        subject='Вы сменили пароль',
-        message=f'Ваш новый пароль: {new_password}',
-        from_email=settings.EMAIL_HOST_USER,
-        recipient_list=[request.user.email],  # список получателей
-    )
+    send_new_password(request.user.email, new_password)  # сервисная функция присылает пароль
     request.user.set_password(new_password)
     request.user.save()
+    send_new_password(request.user.email, new_password)  # сервисная функция присылает пароль после сохранения
     return redirect(reverse('users:login'))
